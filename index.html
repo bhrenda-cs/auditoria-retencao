@@ -6,7 +6,7 @@
 <title>Auditoria de Retenção</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#150C1E;
@@ -42,7 +42,7 @@
     color:var(--violet);
   }
   .ar-h{
-    font-family:'Syne',sans-serif;font-weight:800;
+    font-family:'Sora',sans-serif;font-weight:800;
     line-height:1.08;letter-spacing:-.01em;color:var(--ink);
   }
   .ar-body{font-size:18px;color:var(--muted)}
@@ -51,10 +51,11 @@
 
   /* ---------- buttons ---------- */
   .ar-cta{
-    display:inline-block;font-family:'Syne',sans-serif;font-weight:700;
+    display:inline-block;font-family:'Sora',sans-serif;font-weight:700;
     font-size:17px;letter-spacing:-.01em;
     color:#190f26;background:var(--violet);
-    padding:17px 30px;border-radius:999px;text-decoration:none;
+    padding:17px 30px;border-radius:999px;border:none;text-decoration:none;
+    cursor:pointer;
     transition:transform .18s ease, box-shadow .25s ease, background .2s ease;
     box-shadow:0 0 0 rgba(176,124,240,0);
   }
@@ -119,7 +120,7 @@
 
   /* ---------- erro ---------- */
   .ar-pull{
-    font-family:'Syne',sans-serif;font-weight:600;
+    font-family:'Sora',sans-serif;font-weight:600;
     font-size:clamp(20px,3vw,25px);line-height:1.35;color:var(--ink);
     margin-top:30px;padding-left:22px;border-left:3px solid var(--violet);
   }
@@ -146,12 +147,12 @@
   }
   .ar-step:hover{border-color:var(--line-strong);transform:translateY(-2px)}
   .ar-step-num{
-    font-family:'Syne',sans-serif;font-weight:800;font-size:22px;
+    font-family:'Sora',sans-serif;font-weight:800;font-size:22px;
     width:46px;height:46px;border-radius:13px;flex:none;
     display:grid;place-items:center;color:var(--violet);
     background:var(--surface-2);border:1px solid var(--line-strong);
   }
-  .ar-step h3{font-family:'Syne',sans-serif;font-weight:700;font-size:19px;margin-bottom:8px;color:var(--ink)}
+  .ar-step h3{font-family:'Sora',sans-serif;font-weight:700;font-size:19px;margin-bottom:8px;color:var(--ink)}
   .ar-step p{font-size:15.5px;color:var(--muted);line-height:1.6}
   .ar-step .ar-flag{color:var(--signal);font-weight:600}
 
@@ -170,11 +171,70 @@
     display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;
     font-size:13px;color:var(--muted);
   }
-  .ar-footer .ar-brand{font-family:'Syne',sans-serif;font-weight:700;color:var(--ink);font-size:16px}
+  .ar-footer .ar-brand{font-family:'Sora',sans-serif;font-weight:700;color:var(--ink);font-size:16px}
 
   /* ---------- reveal ---------- */
   .ar-reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
   .ar-reveal.is-in{opacity:1;transform:none}
+
+  /* ---------- modal ---------- */
+  .ar-overlay{
+    position:fixed;inset:0;z-index:100;
+    background:rgba(8,4,14,.72);backdrop-filter:blur(3px);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    opacity:0;pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .ar-overlay.is-open{opacity:1;pointer-events:auto}
+  .ar-modal{
+    width:100%;max-width:420px;
+    background:var(--surface);border:1px solid var(--line-strong);
+    border-radius:22px;padding:36px 32px 32px;
+    position:relative;
+    transform:translateY(14px) scale(.98);
+    transition:transform .25s ease;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+  }
+  .ar-overlay.is-open .ar-modal{transform:translateY(0) scale(1)}
+  .ar-modal-close{
+    position:absolute;top:18px;right:18px;
+    width:34px;height:34px;border-radius:50%;border:1px solid var(--line-strong);
+    background:transparent;color:var(--muted);cursor:pointer;
+    display:grid;place-items:center;font-size:16px;line-height:1;
+    transition:background .2s ease,color .2s ease;
+  }
+  .ar-modal-close:hover{background:var(--surface-2);color:var(--ink)}
+  .ar-modal h3{
+    font-family:'Sora',sans-serif;font-weight:700;font-size:22px;color:var(--ink);
+    margin-bottom:10px;padding-right:20px;line-height:1.25;
+  }
+  .ar-modal p{font-size:14.5px;color:var(--muted);margin-bottom:26px;line-height:1.55}
+  .ar-field{margin-bottom:16px}
+  .ar-field label{
+    display:block;font-size:12.5px;font-weight:600;color:var(--muted);
+    margin-bottom:7px;letter-spacing:.02em;
+  }
+  .ar-field input{
+    width:100%;background:var(--bg);border:1px solid var(--line-strong);
+    border-radius:11px;padding:13px 14px;font-size:15px;color:var(--ink);
+    font-family:'Inter',sans-serif;
+  }
+  .ar-field input::placeholder{color:#6a5d80}
+  .ar-field input:focus{outline:2px solid var(--violet);outline-offset:1px}
+  .ar-modal-submit{
+    width:100%;margin-top:6px;text-align:center;justify-content:center;
+    display:flex;align-items:center;gap:8px;
+  }
+  .ar-modal-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+  .ar-modal-note{margin-top:14px;font-size:12px;color:#7d6f93;text-align:center}
+  .ar-modal-status{
+    display:none;text-align:center;padding:8px 0 2px;
+    font-size:14.5px;color:var(--ink);
+  }
+  .ar-modal-status.is-error{color:#f4a06a}
+  .ar-modal[data-state="success"] .ar-modal-form{display:none}
+  .ar-modal[data-state="success"] .ar-modal-status{display:block}
 
   @media (max-width:560px){
     .ar-wrap{padding:0 22px}
@@ -199,8 +259,8 @@
     <div class="ar-wrap">
       <span class="ar-eyebrow">Auditoria de Retenção</span>
       <h1 class="ar-h">Seu aluno comprou.<br>Mas ele chegou no <span class="ar-q">resultado esperado?</span></h1>
-      <p class="ar-body ar-sub">Você sabe quanto custou seu lead, mas sabe quanto tempo seu aluno leva até sentir que a compra valeu a pena? Eu entro no seu pós-venda e te mostro exatamente o ponto em que você está perdendo ele.</p>
-      <a class="ar-cta" href="http://wa.me/5532998219955" target="_blank" rel="noopener">Quero entender onde estou perdendo aluno</a>
+      <p class="ar-body ar-sub"><strong>Você sabe quanto custou seu lead, mas sabe quanto tempo seu aluno leva até sentir que a compra valeu a pena?</strong> Eu entro no seu pós-venda e te mostro exatamente o ponto em que você está perdendo ele.</p>
+      <button type="button" class="ar-cta" data-open-modal>Quero entender onde estou perdendo aluno</button>
     </div>
   </header>
 
@@ -208,7 +268,7 @@
   <section class="ar-section">
     <div class="ar-wrap ar-reveal">
       <h2 class="ar-h ar-h2">Existe uma métrica que a maioria dos infoprodutores brasileiros ainda não conhece</h2>
-      <p class="ar-body ar-p">Lá fora, Customer Success já não mede sucesso por "o aluno acessou a plataforma". Mede por <strong>Time to First Value (TTFV)</strong> — quanto tempo leva entre o pagamento e o momento em que o aluno realmente sente que teve um resultado.</p>
+      <p class="ar-body ar-p">Lá fora, Customer Success já não mede sucesso por "o aluno acessou a plataforma". Mede por <strong>Time to First Value (TTFV)</strong>, quanto tempo leva <strong>entre o pagamento</strong> e o momento em que o aluno realmente sente que teve um <strong>resultado</strong>.</p>
 
       <!-- signature: linha do tempo TTFV -->
       <div class="ar-timeline">
@@ -236,7 +296,7 @@
         </div>
       </div>
 
-      <p class="ar-body ar-p">Se a meta era 30 dias, mas no dia 7 — último dia em que ele pode pedir o reembolso — chega e ele ainda não sentiu valor nenhum, na dúvida, ele vai cancelar. E esse cancelamento não tem nada a ver com o conteúdo do seu curso. Tem a ver com o <strong>tempo</strong> que ele levou pra sentir que a decisão tinha valido a pena.</p>
+      <p class="ar-body ar-p">Se ele chega no dia 7 sem sentir valor, na dúvida, <strong>ele cancela.</strong> E esse cancelamento não tem nada a ver com o conteúdo do seu curso. Tem a ver com o <strong>tempo</strong> que ele levou pra sentir que a decisão tinha valido a pena.</p>
     </div>
   </section>
 
@@ -244,8 +304,8 @@
   <section class="ar-section">
     <div class="ar-wrap ar-reveal">
       <h2 class="ar-h ar-h2">O problema não é falta de conteúdo. É falta de clareza.</h2>
-      <p class="ar-body ar-p">A maioria dos cursos não erra por entregar pouco — erra por entregar demais, cedo demais. 40 aulas liberadas no primeiro acesso não é valor, é sobrecarga. O aluno não sabe por onde começar, se perde, e o próximo passo dele é <strong>pedir o reembolso</strong>.</p>
-      <p class="ar-pull">O que falta não é mais conteúdo. É um caminho mínimo, claro, até o primeiro resultado.</p>
+      <p class="ar-body ar-p">A maioria dos cursos não erra por entregar pouco, erra por entregar demais, cedo demais.</p>
+      <p class="ar-body ar-p">40 aulas liberadas no primeiro acesso não é valor, é <strong>sobrecarga</strong>. O aluno não sabe por onde começar, se perde, e o próximo passo dele é <strong>pedir o reembolso</strong>.</p>
     </div>
   </section>
 
@@ -254,16 +314,13 @@
     <div class="ar-wrap ar-reveal">
       <span class="ar-eyebrow" style="display:block;margin-bottom:20px">O serviço</span>
       <h2 class="ar-h ar-h2">A Auditoria de Retenção</h2>
-      <p class="ar-body ar-p">Eu analiso tudo o que acontece depois que seu aluno compra — comunicação pós-checkout, sinais de risco, experiência de acesso e suporte — e te mostro, exatamente em qual etapa você está perdendo ele. Você sai com um diagnóstico claro: <strong>onde, por que, e o que fazer</strong> para começar a resolver isso.</p>
+      <p class="ar-body ar-p">Eu analiso tudo o que acontece depois que seu aluno compra <strong>(comunicação pós-checkout, sinais de risco, experiência de acesso e suporte)</strong> e te mostro, exatamente em qual etapa você está perdendo ele.</p>
+      <p class="ar-body ar-p">Você sai com um diagnóstico claro: <strong>onde, por que, e o que fazer</strong> para começar a resolver isso.</p>
 
       <ul class="ar-list">
         <li>
           <span class="ar-mk"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" stroke="#B07CF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           Mapeamento completo da jornada pós-compra
-        </li>
-        <li>
-          <span class="ar-mk"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" stroke="#B07CF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          O ponto exato em que você está perdendo aluno antes do resultado esperado
         </li>
         <li>
           <span class="ar-mk"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5l2.2 2.2L9.5 3.5" stroke="#B07CF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -286,14 +343,14 @@
           <div class="ar-step-num">1</div>
           <div>
             <h3>Formulário</h3>
-            <p>Logo após o pagamento, você recebe um formulário. <span class="ar-flag">Pedimos de 10 a 20 minutos do seu tempo aqui</span> — é a partir das suas respostas que consigo ir fundo na análise, em vez de ficar na superfície.</p>
+            <p>Logo após o pagamento, você recebe um formulário. <span class="ar-flag">Pedimos de 10 a 20 minutos do seu tempo aqui, pois</span> é a partir das suas respostas que consigo ir fundo na análise.</p>
           </div>
         </div>
         <div class="ar-step">
           <div class="ar-step-num">2</div>
           <div>
             <h3>Relatório completo em PDF</h3>
-            <p>Em até 7 dias, você recebe o diagnóstico completo, com todos os pontos mapeados.</p>
+            <p>Em até <strong>7 dias</strong>, você recebe o diagnóstico completo, com todos os pontos mapeados.</p>
           </div>
         </div>
         <div class="ar-step">
@@ -311,8 +368,8 @@
   <section class="ar-section ar-final">
     <div class="ar-wrap ar-reveal">
       <h2 class="ar-h">Talvez você não precise de mais tráfego e sim de parar de perder quem já comprou.</h2>
-      <p class="ar-body">Por <strong>R$992</strong>, você descobre exatamente onde seu aluno está abandonando e sai com um plano claro para mudar isso. Porque todo real que você recupera de quem já comprou vale mais do que mais um clique de quem ainda nem te conhece.</p>
-      <a class="ar-cta" href="http://wa.me/5532998219955" target="_blank" rel="noopener">Quero a minha Auditoria de Retenção</a>
+      <p class="ar-body">Por <strong>R$992</strong>, você descobre exatamente <strong>onde seu aluno está abandonando e sai com um plano claro para mudar isso.</strong> Porque todo real que você recupera de quem já comprou vale mais do que mais um clique de quem ainda nem te conhece.</p>
+      <button type="button" class="ar-cta" data-open-modal>Quero a minha Auditoria de Retenção</button>
     </div>
   </section>
 
@@ -323,6 +380,30 @@
       <span>Auditoria de Retenção</span>
     </div>
   </footer>
+
+  <!-- ===== MODAL ===== -->
+  <div class="ar-overlay" id="arOverlay" aria-hidden="true">
+    <div class="ar-modal" id="arModal" role="dialog" aria-modal="true" aria-labelledby="arModalTitle">
+      <button type="button" class="ar-modal-close" id="arModalClose" aria-label="Fechar">✕</button>
+      <h3 id="arModalTitle">Vamos começar a sua Auditoria</h3>
+      <p>Deixa seu nome e WhatsApp que eu te chamo pra alinhar os próximos passos.</p>
+
+      <form class="ar-modal-form" id="arForm">
+        <div class="ar-field">
+          <label for="arName">Nome</label>
+          <input type="text" id="arName" name="name" placeholder="Seu nome" required autocomplete="name">
+        </div>
+        <div class="ar-field">
+          <label for="arPhone">WhatsApp</label>
+          <input type="tel" id="arPhone" name="whatsapp" placeholder="(00) 00000-0000" required autocomplete="tel" inputmode="tel">
+        </div>
+        <button type="submit" class="ar-cta ar-modal-submit" id="arSubmitBtn">Enviar</button>
+        <p class="ar-modal-note">Seus dados são usados só pra eu entrar em contato sobre a Auditoria.</p>
+      </form>
+
+      <div class="ar-modal-status" id="arStatus"></div>
+    </div>
+  </div>
 
 </div>
 
@@ -335,6 +416,81 @@
     },{threshold:.12});
     els.forEach(function(e){io.observe(e)});
   })();
+
+  // ---------- modal control + form submission ----------
+  (function(){
+    var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mvznjlgr'; // TROCAR pelo endpoint do Formspree
+
+    var overlay = document.getElementById('arOverlay');
+    var modal = document.getElementById('arModal');
+    var closeBtn = document.getElementById('arModalClose');
+    var form = document.getElementById('arForm');
+    var statusEl = document.getElementById('arStatus');
+    var submitBtn = document.getElementById('arSubmitBtn');
+    var openTriggers = document.querySelectorAll('[data-open-modal]');
+    var lastFocused = null;
+
+    function openModal(){
+      lastFocused = document.activeElement;
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){ document.getElementById('arName').focus(); }, 250);
+    }
+
+    function closeModal(){
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if(lastFocused) lastFocused.focus();
+    }
+
+    openTriggers.forEach(function(btn){
+      btn.addEventListener('click', openModal);
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      statusEl.classList.remove('is-error');
+
+      var formData = new FormData(form);
+
+      fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response){
+        if(response.ok){
+          statusEl.textContent = 'Recebi seus dados! Te chamo no WhatsApp em breve. 🎯';
+          modal.setAttribute('data-state', 'success');
+          form.reset();
+        } else {
+          throw new Error('submit failed');
+        }
+      })
+      .catch(function(){
+        statusEl.textContent = 'Algo deu errado. Tenta de novo ou chama no WhatsApp direto.';
+        statusEl.classList.add('is-error');
+        statusEl.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar';
+      });
+    });
+  })();
+
 </script>
 </body>
 </html>
