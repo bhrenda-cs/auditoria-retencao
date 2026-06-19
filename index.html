@@ -474,7 +474,7 @@
       })
       .then(function(response){
         if(response.ok){
-          statusEl.textContent = 'Recebi seus dados! Te chamo no WhatsApp em breve. 🎯';
+          statusEl.textContent = 'Recebi seus dados! Te chamo no WhatsApp em até 3 horas. 🎯';
           modal.setAttribute('data-state', 'success');
           form.reset();
         } else {
@@ -482,7 +482,7 @@
         }
       })
       .catch(function(){
-        statusEl.textContent = 'Algo deu errado. Tenta de novo ou chama no WhatsApp direto.';
+        statusEl.textContent = 'Poxa, algo deu errado. Pode tentar de novo? Caso não dê certo, me envie um e-mail para bhrenda.cs@gmail.com e eu te respondo em até 6hrs.';
         statusEl.classList.add('is-error');
         statusEl.style.display = 'block';
         submitBtn.disabled = false;
